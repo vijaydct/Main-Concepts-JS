@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <!-- https://unpkg.com/react@16.13.1/umd/react.development.js -->
+    <script src="./js/react.development.js"></script>
+    <!-- https://unpkg.com/react-dom@16.13.1/umd/react-dom.development.js -->
+    <script src="./js/react-dom.development.js"></script>
+    <!-- https://unpkg.com/browse/babel-standalone@6.26.0/babel.js -->
+    <script src="./js/babel.js"></script>
+    <script type="text/babel">
+    const rootHandle = document.getElementById('root')
+        class LoginValidation extends React.Component{
+            constructor(){
+                super()
+                this.state={
+                    firstName:'',
+                    msg:''
+                }
+            }
+
+            handleNameChange = (e) =>{
+                const firstName = e.target.value
+                this.setState({firstName, msg:''})
+            }
+
+            handleSubmit = (e) =>{
+                e.preventDefault()
+                console.log('formData', this.state)
+               this.setState((prevState)=>{
+                   return{
+                       msg: prevState.firstName
+                   }
+               })
+            }
+
+            render() {
+                // to update the updated message
+                // we can use for password entering in realtime example
+                return(
+                    <div>
+                        <h2>Enter name</h2>
+                        <form onSubmit={this.handleSubmit}>
+                            <label>firstName</label>
+                            <input
+                                type="text"
+                                value={this.state.firstName}
+                                onChange={this.handleNameChange}
+                            /> <br/>
+                            <input type="submit" value="submit"/>
+                        </form>
+                        { this.state.msg && <h2>{`your name is ${this.state.msg} & it has ${this.state.msg.length} characters`}</h2> }
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(<LoginValidation/>, rootHandle)
+    </script>
+
+</body>
+
+</html>

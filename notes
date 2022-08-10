@@ -1,0 +1,20 @@
+1) function component
+    - reusable
+    - work in isolation 
+    - independent
+
+name- should be in capital
+1 input called as props
+return react elements
+
+2) class component
+    - retain data inside the component means we can store the data inside the component
+    - can not we store the data inside the function component? yes you can, but everytime you have to rerender the element or component when value of the variable changes
+    - in class component, you no need to rerender the element or component when value of the variable changes. it will automatically rerender when value of the variable change
+    - this is the biggest advantage of class component over the functional component
+    - you can reffer the 13-render.html file 
+    - state which will be object
+
+ 3) can we update state directly? Yes, but we should not do it this way, because, state value changes but the component doesnot re render
+
+    instead we use the setState method, to ensure we not only change the value of the state but it also re render the component

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <!-- https://unpkg.com/react@16.13.1/umd/react.development.js -->
+    <script src="./js/react.development.js"></script>
+    <!-- https://unpkg.com/react-dom@16.13.1/umd/react-dom.development.js -->
+    <script src="./js/react-dom.development.js"></script>
+    <!-- https://unpkg.com/browse/babel-standalone@6.26.0/babel.js -->
+    <script src="./js/babel.js"></script>
+    <script type="text/babel">
+
+        const rootHandle = document.getElementById('root')
+        // We can not exchange the data b/w adjucent components in react. but, we can do via one of two ways that is parent-child relationship concept.
+        //  We can embed the ComponenTwo into ComponentOne and pass the data via parops to ComponentTwo is called parent-child relation.
+        // when we are passing the data as props which is not only datatypes(string, numbers, boolean & objects), we can also passdown functions / methods via props.
+        // Btn component reusability, write once use more times
+        
+        class Counter extends React.Component { // parent component
+            constructor() {
+                super()
+                this.state = {
+                    count: 0
+                }
+            }
+
+            handleUp = () => {
+                this.setState((prevState) => {
+                    return {
+                        count: prevState.count += 1
+                    }
+                })
+            }
+
+            handleDown = () => {
+                this.setState((prevState) => {
+                    return {
+                        count: prevState.count -= 1
+                    }
+                })
+            }
+
+            handleReset = () => {
+                this.setState({count: 0})
+            }
+
+            render() {
+                return (
+                    <div>
+                        <h1>{this.state.count}</h1>
+                        <Btn btnText ='up' handleClick={this.handleUp}/>
+                        <Btn btnText ='down' handleClick={this.handleDown}/>
+                        <Btn btnText ='reset' handleClick={this.handleReset}/>
+                    </div>
+                )
+            }
+        }
+
+
+        // child component
+        function Btn(props) {
+            return (
+                <div>
+                    <button onClick= {props.handleClick}>{props.btnText}</button>
+                </div>
+            )
+        }
+
+    ReactDOM.render(<Counter />, rootHandle);
+
+    </script>
+
+</body>
+
+</html>

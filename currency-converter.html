@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <!-- https://unpkg.com/react@16.13.1/umd/react.development.js -->
+    <script src="./js/react.development.js"></script>
+    <!-- https://unpkg.com/react-dom@16.13.1/umd/react-dom.development.js -->
+    <script src="./js/react-dom.development.js"></script>
+    <!-- https://unpkg.com/browse/babel-standalone@6.26.0/babel.js -->
+    <script src="./js/babel.js"></script>
+    <script type="text/babel">
+    const rootHandle = document.getElementById('root')
+    class Currency extends React.Component{
+        constructor(){
+            super()
+            this.state={
+                dollar:1,
+                rupees:0
+            }
+        }
+
+        handleCurrencyChange = (e) => {
+            const dollar= e.target.value
+                this.setState({dollar})
+        }
+
+        componentDidMount() {
+            const xhr = new XMLHttpRequest
+            xhr.open('GET', 'https://api.exchangeratesapi.io/latest?base=USD')
+            xhr.send()
+
+            xhr.onload = () => {
+                const resp = JSON.parse(xhr.responseText)
+                const rupees = Math.floor(resp.rates.INR)
+                this.setState({rupees})
+            }
+
+        }
+
+       
+        render(){
+            return (
+                <div>
+                <h1 style={{color:'blue'}}>Currency Converter</h1>
+                <h3>INR- <span style={{color:'orange'}}>₹{this.state.rupees * this.state.dollar}</span></h3>
+                <h3>USD- <span style={{color:'red'}}>${this.state.dollar}</span></h3>
+                <form>
+                    <input 
+                        type="range"
+                        value={this.state.dollar} 
+                        min="1"
+                        max="100" 
+                        onInput={this.handleCurrencyChange}
+                    />
+                </form>
+                <h3 style={{color:'blue'}}>Currency-$1 = ₹{this.state.rupees}</h3>
+                <h1 style={{color:'blue'}}>Salary in Dollars</h1>
+                <h3>Hourly- <span style={{color:'red'}}>${this.state.dollar}</span></h3>
+                <h3>Daily- <span style={{color:'red'}}>${this.state.dollar * 8}</span></h3>
+                <h3>Monthly- <span style={{color:'red'}}>${this.state.dollar * 8 * 21}</span></h3>
+                <h1 style={{color:'blue'}}>Salary in Rupees</h1>
+                <h3>Hourly- <span style={{color:'orange'}}>₹{this.state.dollar * this.state.rupees}</span></h3>
+                <h3>Daily- <span style={{color:'orange'}}>₹{this.state.dollar * this.state.rupees * 8}</span></h3>
+                <h3>Monthly- <span style={{color:'orange'}}>₹{this.state.dollar * this.state.rupees * 8 * 21}</span></h3>
+                </div>
+            )
+        }
+
+    }
+    ReactDOM.render(<Currency />, rootHandle)
+    </script>
+
+</body>
+
+</html>

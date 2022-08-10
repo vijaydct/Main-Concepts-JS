@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <!-- https://unpkg.com/react@16.13.1/umd/react.development.js -->
+    <script src="./js/react.development.js"></script>
+    <!-- https://unpkg.com/react-dom@16.13.1/umd/react-dom.development.js -->
+    <script src="./js/react-dom.development.js"></script>
+    <!-- https://unpkg.com/browse/babel-standalone@6.26.0/babel.js -->
+    <script src="./js/babel.js"></script>
+    <script type="text/babel">
+    const rootHandle = document.getElementById('root')
+     class Paybill extends React.Component{
+        constructor(){
+            super()
+            this.state={
+                service:'Vodafone',
+                number:'' 
+            }
+        }
+
+        handleChange=(name)=>{
+            this.setState({service:name})
+        }
+
+        handleMobileNumberChange=(e)=>{
+            this.setState({number:e.target.value})
+        }
+
+        render(){
+            return(
+                <div>
+                    <h1>Pay Bill for {this.state.service}</h1>
+                    <form>
+                        <input
+                            type="radio"
+                            name="service"
+                            checked={this.state.service === 'Vodafone'}
+                            onChange={()=>this.handleChange('Vodafone')} 
+                        /> Vodafone
+                        <input
+                            type="radio"
+                            name="service"
+                            checked={this.state.service === 'Airtel'}
+                            onChange={()=>this.handleChange('Airtel')} 
+                        /> Airtel
+                        <input
+                            type="radio"
+                            name="service"
+                            checked={this.state.service === 'Jio'}
+                            onChange={()=>this.handleChange('Jio')} 
+                        /> Jio <br/>
+                        <input
+                            type="number"
+                            value={this.state.number}
+                            placeholder={`Enter your ${this.state.service} number`}
+                            onChange={this.handleMobileNumberChange}
+                        />
+                    </form>
+                </div>
+            )
+        }
+     }
+    ReactDOM.render(<Paybill />, rootHandle)
+    </script>
+
+</body>
+
+</html>

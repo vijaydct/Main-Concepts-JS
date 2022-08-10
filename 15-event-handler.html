@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <!-- https://unpkg.com/react@16.13.1/umd/react.development.js -->
+    <script src="./js/react.development.js"></script>
+    <!-- https://unpkg.com/react-dom@16.13.1/umd/react-dom.development.js -->
+    <script src="./js/react-dom.development.js"></script>
+    <!-- https://unpkg.com/browse/babel-standalone@6.26.0/babel.js -->
+    <script src="./js/babel.js"></script>
+    <script type="text/babel">
+    const rootHandler = document.getElementById('root');
+    function ShowButton(props){ 
+        // event handler or event listerner click
+        const handleClick= () => {
+            alert('you clicked the button')
+        }
+        const handleMouseOver = () => {
+            alert('you brought the mouse over the button')
+        }
+        // we dont want create the events which already provided by the browser there are 83 events
+        // we just listen or handle the event for that we need toexecute some code via function 
+        // to listen to event we have some props onClick which already provided by button
+        // handleClick is reference that doesnt mean invoke function like handleClick(), if invoke function like handleClick() for button, then it will call the function without clicking the button when the first time redering the page. so dont invoke function just give the reference name of the function.
+        // In react, UI and logic kept together separately  
+        // NOTE: event -> click, prop -> onClick, eventHandler -> normal js function
+        return (
+            <div>
+                <button onClick={handleClick}> click me</button>
+                <button onMouseOver={handleMouseOver}> button 2 </button>
+            </div>
+        )
+    }
+        ReactDOM.render(<ShowButton />, rootHandler);
+    </script>
+
+</body>
+
+</html>

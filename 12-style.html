@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <!-- https://unpkg.com/react@16.13.1/umd/react.development.js -->
+    <script src="./js/react.development.js"></script>
+    <!-- https://unpkg.com/react-dom@16.13.1/umd/react-dom.development.js -->
+    <script src="./js/react-dom.development.js"></script>
+    <!-- https://unpkg.com/browse/babel-standalone@6.26.0/babel.js -->
+    <script src="./js/babel.js"></script>
+    <script type="text/babel">
+        const tasks=[{id:1, title:'Server Deploy', status:false}, {id:2, title:'db backup', status:true}, {id:3, title:'client call', status:true}];
+        // inline style ->  style={{color: 'red'}}, first flower {} for javascript, second flower {} is for object notation
+        // in react, style object properties should be in camel case like backgroungColor.
+        // keep in mind, react can not print the undefined inside the JSX. if you want to print, put it in 'undefined'
+        // react can not print the object, but it can access the object properties and it can print.
+        // function decideColor(ele){
+        //     if(ele.status){
+        //         return 'green'
+        //     }else{
+        //         return 'red'
+        //     }
+        // }
+        // if there is too much logic inside style, you can write separate function, then you can call that function inside the style object.
+        // if it is simple logic inside the style object, use ternary operator.
+        const ele = (
+            <div>
+                <h2>Listing of Tasks</h2> 
+                <ul>
+                    {
+                        tasks.map(ele => {
+                            return <li style={{color: ele.status ? 'green':'red'}}>{ele.title}</li>
+                    })
+                }
+                </ul>
+            </div> 
+        )
+
+        ReactDOM.render(ele, document.getElementById('root'))
+    </script>
+
+</body>
+
+</html>

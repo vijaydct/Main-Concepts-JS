@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <!-- https://unpkg.com/react@16.13.1/umd/react.development.js -->
+    <script src="./js/react.development.js"></script>
+    <!-- https://unpkg.com/react-dom@16.13.1/umd/react-dom.development.js -->
+    <script src="./js/react-dom.development.js"></script>
+    <!-- https://unpkg.com/browse/babel-standalone@6.26.0/babel.js -->
+    <script src="./js/babel.js"></script>
+    <script type="text/babel">
+
+const rootHandle = document.getElementById('root')
+
+        class TasksList extends React.Component {
+            constructor() {
+                super()
+                this.state = {
+                    tasks: [],
+                    id: '',
+                    title: '',
+                    completedDate: '',
+                    status: false
+                }
+            }
+
+            handleRemove = (id) => {
+                const confirmRemove = confirm("Are you sure?")
+                if (confirmRemove) {
+                    this.setState((prevState) => {
+                        return {
+                            tasks: prevState.tasks.filter(task => task.id != id)
+                        }
+                    })
+                }
+            }
+
+            handleShow = (task) => {
+
+                    alert(`id-${task.id}, title- ${task.title}, status- ${task.status}, completed- ${task.completedDate}`)
+            }
+
+            handleIdChange = (e) => {
+                const id = parseInt(e.target.value) // parseInt converts string into number
+                this.setState({id})
+            }
+
+            handleTitleChange = (e) => {
+                const title = e.target.value
+                this.setState({title})
+            }
+
+            handleStatusChange = (e) => {
+                // for checkbox, no need the 'value' prop
+                // we use 'checked' prop instead of 'value' prop
+                const status = e.target.checked
+                this.setState({status})
+            }
+
+            handleDateChange = (e) => {
+                const completedDate = e.target.value
+                this.setState({completedDate})
+            }
+
+            handleSubmit = (e) => {
+                e.preventDefault()
+                const formData = {
+                    id: this.state.id,
+                    title: this.state.title,
+                    status: this.state.status,
+                    completedDate: this.state.completedDate
+                }
+                console.log(formData)
+
+                this.setState((prevState)=>{
+                    return {
+                        tasks: prevState.tasks.concat(formData), // keep in mind, here we are adding the object into existing array and returning new array
+                        id:'',
+                        title: '',
+                        status: false,
+                        completedDate: ''
+                    }
+                })
+
+            }
+
+
+            render() {
+                return (
+                    <div>
+                        <h1> Listing Tasks - {this.state.tasks.length} </h1>
+                        <table border="1">
+                            <thead>
+                                <tr>
+                                    <th> # </th>
+                                    <th> title </th>
+                                    <th> status </th>
+                                    <th>completed date</th>
+                                    <th> action </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {this.state.tasks.map((task, i) => {
+                                    return (
+                                        <tr key={task.id}>
+                                            <td> {i + 1}</td>
+                                            <td> {task.title}</td>
+                                            <td> {task.status ? 'completed' : "ongoing"}</td>
+                                            <td>{task.status ? task.completedDate : '-'}</td>
+                                            <td>
+                                                <button onClick={() => {
+                                                    this.handleRemove(task.id)
+                                                }}>
+                                                    remove
+                                                </button>
+                                                <button onClick={() => {
+                                                    this.handleShow(task)
+                                                }}>
+                                                    show
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    )
+                                })}
+                            </tbody>
+                        </table>
+
+                        <h2>Add Task</h2> 
+                        <form onSubmit={this.handleSubmit}>
+                            <label>Id</label>
+                            <input type="number" value={this.state.id} onChange={this.handleIdChange}  /> <br/>
+
+                            <label>title</label>
+                            <input type="text" value={this.state.title} onChange={this.handleTitleChange} required={true} /> <br/>
+
+                            <label>status</label>
+                            <input type="checkbox" checked={this.state.status} onChange={this.handleStatusChange}/> <br/>
+                            {
+                                this.state.status && (
+                                    <div>
+                                        <label>completed date</label>
+                                        <input type="date" value={this.state.completedDate} onChange={this.handleDateChange}/> <br/>
+                                    </div>
+                                    )
+                            }
+
+                            <input type="submit" value="add task"/>
+                        </form>
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(<TasksList />, rootHandle)
+    </script>
+
+</body>
+
+</html>

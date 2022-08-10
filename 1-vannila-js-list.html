@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+
+<body>
+    <h1 id="count"> Listing fruits </h1>
+    <ul id="list">
+    </ul>
+    <script>
+        const fruits=['mango', 'apple', 'kiwi']
+        const countHandle=document.getElementById('count')
+        const listHandle=document.getElementById('list')
+        countHandle.innerHTML='Listing fruits-' + fruits.length
+        fruits.forEach(function(ele){
+            // method approch
+                // const liTag=document.createElement('li')
+                // liTag.innerHTML= ele
+                // listHandle.appendChild(liTag)
+            // string approach
+                listHandle.innerHTML +=`<li> <a href=${`http://www.wikipedia.com/wiki/${ele}`} target="_blank"> ${ele} </a> </li>`
+        })
+
+    </script>
+</body>
+
+</html>

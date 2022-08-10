@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+
+<body>
+    <div id="root">
+    </div>
+
+    <!-- https://unpkg.com/react@16.13.1/umd/react.development.js -->
+    <!-- For writing the development source code -->
+    <script src="./js/react.development.js"></script>
+    <!-- https://unpkg.com/react-dom@16.13.1/umd/react-dom.development.js -->
+    <!-- By using react dom, to render the source code in browser -->
+    <script src="./js/react-dom.development.js"></script>
+    <!-- https://unpkg.com/browse/babel-standalone@6.26.0/babel.js -->
+    <script src="./js/babel.js"></script>
+    <script type="text/babel">
+        const players = ['sachin', 'sehwag', 'dhoni', 'virat', 'zaheer', 'ashwin'];
+        // jsx - Javascript XML --> const ele = <h1></h1>
+        // embed expressions 
+        // only render 1 element at a time with react
+        // const playerArray = []
+        // for(let i=0; i<players.length; i++){
+        //     playerArray.push(<li> { players[i] } </li>)
+        // }
+        const ele = (
+            // if we dont use the div tag or element, Uncaught SyntaxError: Inline Babel script: Adjacent JSX elements must be wrapped in an enclosing tag (10:16)
+            // React, always renders only one element 
+            // main parent element can have multiple child elements
+            // map --> works on array and returns an array
+            // Browser can not understand the javascript, it will convert JS into html (tree structure)
+            <div>
+                <h1>Listing players - {players.length} </h1>
+                <p> There is a list of the selected players: </p>
+                <ul>
+                    {players.map(function(player) {
+                        return <li key={player}>{player}</li>
+                    })}
+                    
+
+                </ul>
+            </div>
+
+        )
+
+        ReactDOM.render(ele, document.getElementById('root'))
+
+    </script>
+</body>
+
+</html>

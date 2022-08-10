@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <!-- https://unpkg.com/react@16.13.1/umd/react.development.js -->
+    <script src="./js/react.development.js"></script>
+    <!-- https://unpkg.com/react-dom@16.13.1/umd/react-dom.development.js -->
+    <script src="./js/react-dom.development.js"></script>
+    <!-- https://unpkg.com/browse/babel-standalone@6.26.0/babel.js -->
+    <script src="./js/babel.js"></script>
+    <script type="text/babel">
+    const rootHandler = document.getElementById('root');
+    class Greet extends React.Component{
+        // now, handleClick is a method for Greet
+        handleClick = () => {
+            alert('welcome to the page')
+        }
+        // dont inkvoke as this.handleClick(), when the line interpretes it get invoked.
+        render(){
+            // handleClick = () => {
+            // alert('welcome to the page')
+            // }
+            // we dont do like method inside the render(), because there is a chance to invoke by other methods via this for properties as well as methods.
+            return(
+                <div>
+                    <button onClick={this.handleClick}>click</button>
+                </div>
+            )
+        }
+    }
+        ReactDOM.render(<Greet/>, rootHandler);
+    </script>
+
+</body>
+
+</html>

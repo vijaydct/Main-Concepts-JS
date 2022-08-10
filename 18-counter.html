@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <!-- https://unpkg.com/react@16.13.1/umd/react.development.js -->
+    <script src="./js/react.development.js"></script>
+    <!-- https://unpkg.com/react-dom@16.13.1/umd/react-dom.development.js -->
+    <script src="./js/react-dom.development.js"></script>
+    <!-- https://unpkg.com/browse/babel-standalone@6.26.0/babel.js -->
+    <script src="./js/babel.js"></script>
+    <script type="text/babel">
+    const rootHandle = document.getElementById('root')
+class Counter extends React.Component {
+    constructor() {  // to set the initial values to the properties
+        console.log('constructor')
+        super() // whenever we are using inheritance(extends),  we have to invoke the constructor() in the parent class (React.Component) by using super keyword, if not, it wont work
+        this.state = {//state is special property for class. it is an object to hold the multiple values within the class component.
+            count: 0
+        }
+    }
+
+    handleUp = () => {
+        console.log('handle up event handler')
+        // this.state.count += 1
+        // console.log(this.state)
+        this.setState((prevState) => {// setState is the react method to update the state value but also it rerender the compnent (will call render())
+            // it takes 1 call back function with one arguement. it is a state object
+            return { // should return object
+                count: prevState.count + 1
+            }
+        })
+
+    }
+    handleDown= () => {
+        console.log('handle down event handler')
+        // this.state.count += 1
+        // console.log(this.state)
+        this.setState((prevState) => {
+            return {
+                count: prevState.count -1
+            }
+        })
+
+    }
+    handleReset=()=>{
+        // this.setState((prevState)=>{
+        //     return {
+        //         count:0
+        //     }
+        // });
+        this.setState({count:0}) // we are not depending on prevState value, that is why we are directly passing an object, it can work, no need to worry
+    }
+    handleGenerate=()=>{
+        const random=Math.round(Math.random()*100)
+        this.setState({count:random})
+    }
+    render() {
+        console.log('render')
+        // wherever state properties using, in all places the value will get update (scope) within the component itself. not in other components
+        // scope of the state is within the component itself. we cannot access from other components
+        return (
+            <div>
+                <h1>{this.state.count}</h1>
+                <button onClick={this.handleUp}> up </button>
+                <button onClick={this.handleDown}> down </button>
+                <button onClick={this.handleReset}> reset </button>
+                <button onClick={this.handleGenerate}> generate </button>
+                <h1>{this.state.count}</h1>
+            </div> 
+        )
+    }
+}
+const ele=(
+    <div>
+    <Counter/>
+    </div>
+)
+ReactDOM.render(ele, rootHandle)
+    </script>
+
+</body>
+
+</html>

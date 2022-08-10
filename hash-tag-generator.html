@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <!-- https://unpkg.com/react@16.13.1/umd/react.development.js -->
+    <script src="./js/react.development.js"></script>
+    <!-- https://unpkg.com/react-dom@16.13.1/umd/react-dom.development.js -->
+    <script src="./js/react-dom.development.js"></script>
+    <!-- https://unpkg.com/browse/babel-standalone@6.26.0/babel.js -->
+    <script src="./js/babel.js"></script>
+    <script type="text/babel">
+    const rootHandle = document.getElementById('root')
+    class HashTagGenerator extends React.Component{
+        constructor(){
+            super()
+            this.state={
+                string:'',
+                hashTag:''
+            }
+        }
+
+        handleChangeText=(e)=>{
+            const string=e.target.value
+            let hashTag=''
+            string.split(' ').forEach((element, i) => {
+                if(element){
+                    if(i === 0){
+                        hashTag='#'+ element[0].toUpperCase()+element.substr(1)
+                    }else{
+                        hashTag+=element[0].toUpperCase()+element.substr(1)
+                    }
+                }                
+            });
+                
+            this.setState({string, hashTag})
+        }
+
+        render(){
+            return(
+                <div>
+                    <h1>Hash Tag Generator</h1>
+                    <input 
+                        type="text" 
+                        value={this.state.string} 
+                        placeholder="enter a string" 
+                        onChange={this.handleChangeText}
+                    />
+                    <h1>{this.state.hashTag}</h1>
+                </div>
+            )
+        }
+    }
+    ReactDOM.render(<HashTagGenerator/>, rootHandle)
+    </script>
+
+</body>
+
+</html>

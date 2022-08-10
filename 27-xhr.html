@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+
+<body>
+    <script type = "text/javascript">
+        const xhr = new XMLHttpRequest() // XMLHttpRequest() constructor method whcih is provided by browser. but, not by any programing language
+        // http methods
+        /*
+            POST - Create (C)
+            GET- Read (R)
+            PUT / PATCH - Update (U)
+            DELETE- Destroy (D)
+        */
+
+        //open method is for targeting the destination
+        xhr.open('GET', 'https://jsonplaceholder.typicode.com/users') // open method takes two arguements which are 1) http method 2) url from where we need to get data
+
+        xhr.send() // to send the request to the server
+
+        // async callback
+        xhr.onload = function(){ // if response get success
+            const users = JSON.parse(xhr.responseText)
+            console.log(users)
+        }
+
+        /*
+
+            JSON -> objcet - JSON.parse(obj)
+            object -> JSON - JSON.stringify(obj)    
+
+        */
+
+        xhr.onerror = function() { // if response get failed
+            console.log(xhr.responseText)
+        }
+
+    </script>
+</body>
+
+</html>

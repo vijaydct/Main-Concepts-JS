@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <!-- https://unpkg.com/react@16.13.1/umd/react.development.js -->
+    <script src="./js/react.development.js"></script>
+    <!-- https://unpkg.com/react-dom@16.13.1/umd/react-dom.development.js -->
+    <script src="./js/react-dom.development.js"></script>
+    <!-- https://unpkg.com/browse/babel-standalone@6.26.0/babel.js -->
+    <script src="./js/babel.js"></script>
+    <script type="text/babel">
+    const rootHandle=document.getElementById('root')
+
+    class  RemoveElement extends React.Component {
+        constructor(){
+            super()
+            this.state={
+                list:[{id:1, name:'vijay'}, {id:2, name:'kajal'}, {id:3, name:'sam'}]
+            }
+        }
+
+        handleRemove=(id)=>{
+            const name = prompt('enter valid name');
+            this.state.list.forEach(element => {
+                if(element.name === name){
+                    this.setState( prevState =>{
+                        return{
+                            list:prevState.list.filter(user=> user.id !== id)
+                        }
+                    })
+                }
+            })
+
+            alert('invalid name')
+        }
+ 
+  
+    render(){
+
+        return(
+            <div>
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>name</th>
+                            <th>action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            this.state.list.map(task=>{
+                                return(
+                                    <tr key={task.id}>
+                                        <td>{task.id}</td>
+                                        <td>{task.name}</td>
+                                        <td><button onClick={()=>this.handleRemove(task.id)}>remove</button></td>
+                                    </tr>
+                                )
+                            })
+                        }
+                    </tbody>
+                </table>
+            </div>
+        )
+    }
+    }
+
+    ReactDOM.render(<RemoveElement/>, rootHandle)
+    </script>
+
+</body>
+
+</html>

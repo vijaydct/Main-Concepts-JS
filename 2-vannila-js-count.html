@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+
+<body>
+    <!-- first instance -->
+    <h1 id="head1">0</h1>
+    <button id="btn-up"> up</button>
+    <button id="btn-down"> down</button>
+    <h3 id="head3">0</h3>
+
+    <!-- seconst instance -->
+
+    <h1 id="head1a">0</h1>
+    <button id="btn-upa"> up</button>
+    <button id="btn-downa"> down</button>
+    <h3 id="head3a">0</h3>
+
+    <script>
+        // first instance
+        let count=0
+        // get the references for all elements
+        const head1Handle = document.getElementById('head1')
+        const head3Handle = document.getElementById('head3')
+        const btnUpHandle = document.getElementById('btn-up')
+        const btnDownHandle = document.getElementById('btn-down')
+
+        head1Handle.innerHTML = count
+        head3Handle.innerHTML = count
+    // click event handler
+        btnUpHandle.addEventListener('click', ()=>{
+            count += 1
+
+        head1Handle.innerHTML = count
+        head3Handle.innerHTML = count
+
+        })
+
+        btnDownHandle.addEventListener('click', ()=>{
+            count -= 1
+
+        head1Handle.innerHTML = count
+        head3Handle.innerHTML = count
+
+        })
+        
+        
+        // second instance
+        let counta=0
+        // get the references for all elements
+        const head1aHandle = document.getElementById('head1a')
+        const head3aHandle = document.getElementById('head3a')
+        const btnUpaHandle = document.getElementById('btn-upa')
+        const btnDownaHandle = document.getElementById('btn-downa')
+
+        head1aHandle.innerHTML = counta
+        head3aHandle.innerHTML = counta
+    // click event handler
+        btnUpaHandle.addEventListener('click', ()=>{
+            counta += 1
+        // here, not only updating the value, have to update the UI manually, this is the dis advantage when compare to React. in React, we just focus on state updating, then we no need to update the UI, React will take care of updating UI.
+        head1aHandle.innerHTML = counta
+        head3aHandle.innerHTML = counta
+
+        })
+
+        btnDownaHandle.addEventListener('click', ()=>{
+            counta -= 1
+
+        head1aHandle.innerHTML = counta
+        head3aHandle.innerHTML = counta
+
+        })
+
+    </script>
+</body>
+
+</html>

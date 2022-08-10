@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <!-- https://unpkg.com/react@16.13.1/umd/react.development.js -->
+    <script src="./js/react.development.js"></script>
+    <!-- https://unpkg.com/react-dom@16.13.1/umd/react-dom.development.js -->
+    <script src="./js/react-dom.development.js"></script>
+    <!-- https://unpkg.com/browse/babel-standalone@6.26.0/babel.js -->
+    <script src="./js/babel.js"></script>
+    <script type="text/babel">
+
+        const rootHandle = document.getElementById('root')
+        // We can not exchange the data b/w adjucent components in react. but, we can do via one of two ways that is parent-child relationship concept.
+        //  We can embed the ComponenTwo into ComponentOne and pass the data via parops to ComponentTwo is called parent-child relation.
+
+        
+        class ComponentOne extends React.Component{ // parent component
+            constructor(){
+                super()
+                this.state = {
+                    total: 100
+                }
+            }
+
+            render() {
+                return (
+                    <div>
+                        <h1>Component One- {this.state.total} </h1>
+                        <ComponentTwo total= {this.state.total}/>
+                    </div>
+                )
+            }
+        }
+
+        // child component
+        function ComponentTwo(props) {
+            return (
+                <div>
+                    <h2>Component Two- {props.total} </h2>
+                </div>
+            )
+        }
+
+        ReactDOM.render(<ComponentOne />, rootHandle)
+
+    </script>
+
+</body>
+
+</html>

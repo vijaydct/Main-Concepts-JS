@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+
+<body>
+    <div id="root">
+    </div>
+
+    <!-- https://unpkg.com/react@16.13.1/umd/react.development.js -->
+    <script src="./js/react.development.js"></script>
+    <!-- https://unpkg.com/react-dom@16.13.1/umd/react-dom.development.js -->
+    <script src="./js/react-dom.development.js"></script>
+    <!-- https://unpkg.com/browse/babel-standalone@6.26.0/babel.js -->
+    <script src="./js/babel.js"></script>
+    <script type="text/babel">
+
+    // function component
+    // function name in capital(Pascal Case)
+    // 1 input called as props
+    // return react elements
+    // function component name should be in upperCase, if not, browser treates it as normal html tag
+    // otherwise it will show the error like react-dom.development.js:82 Warning: The tag <person> is unrecognized in this browser. If you meant to render a React component, start its name with an uppercase letter.
+    // in person
+    // in div
+       function Person(props){
+           console.log(props);
+           return <p> {props.name} lives in {props.city}</p>
+       }
+    //  whenever you want call the component in react you should pass the data as attributes like <a href="fb.com" target="_blank"> </a>
+    //  you can call the component like {Person({name:'vijay', city:'JDM'})}
+    // calling component also should be in upperCase
+        const ele = (
+            <div>
+            <Person name="vijay" city="JDM"/>
+            <Person name="Simha" city="KNL"/>
+            </div> 
+        )
+
+        ReactDOM.render(ele, document.getElementById('root'))
+
+    </script>
+</body>
+
+</html>

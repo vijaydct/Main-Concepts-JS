@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <!-- https://unpkg.com/react@16.13.1/umd/react.development.js -->
+    <script src="./js/react.development.js"></script>
+    <!-- https://unpkg.com/react-dom@16.13.1/umd/react-dom.development.js -->
+    <script src="./js/react-dom.development.js"></script>
+    <!-- https://unpkg.com/browse/babel-standalone@6.26.0/babel.js -->
+    <script src="./js/babel.js"></script>
+    <script type="text/babel">
+        const employees = [
+            { id: 1, name: 'arjun', email: 'arjun@gmail', gender: 'male', department: 'tech'},
+            { id: 2, name: 'sruthi', email: 'sruthi@gmail', gender: 'female', department: 'tech' },
+            { id: 3, name: 'deepa', email: 'deepa@gmail', gender: 'female', department: 'hr' },
+            { id: 4, name: 'jobin', email: 'jobin@gmail', gender: 'male', department: 'facility' },
+         ]
+         const maleEmployees = employees.filter(function(ele){
+             return ele.gender === 'male'
+         })
+         const femaleEmployees = employees.filter(function(ele){
+             return ele.gender === 'female'
+         })
+
+         const techEmployees = employees.filter(function(ele){
+             return ele.department === 'tech'
+         })
+        //  Component - function component
+        // this is the fundamental building block of react.
+         function EmployeesTable(props) {
+            //  NOTE: EmployeesTable(props) is not a constructor function why because, we are not using new keyword when calling the function
+             console.log('props', props);
+             //props means object. it is like passing the parameter to the function 
+            //  NOTE: Inside the JSX, we can write javascript as well as Inside the javascript we can write JSX
+             return  <table border ={props.border}>
+                    <thead>
+                        <th>#</th>
+                        <th>name</th>
+                        <th>gender</th>
+                        <th>email</th>
+                        <th>department</th>
+                    </thead> 
+                    <tbody>
+                        {props.data.map(function(ele){
+                           return <tr>
+                                    <td>{ele.id}</td>
+                                    <td>{ele.name}</td>
+                                    <td>{ele.gender}</td>
+                                    <td>{ele.email}</td>
+                                    <td>{ele.department}</td>
+                                </tr>
+                        })}
+                    </tbody>
+                </table>
+         }
+// Here, function reusability concept using, no need to write so much code for all employee tables.
+// just write one table in function, then reuse it while calling the funtion
+// keep in mind, we can reuse the function when we pass the parameters to function otherwise we can not reuse it.
+// props = {data:employees, border:'1' }
+         const ele = (
+             <div>
+                <h1> Listing all employees- {employees.length} </h1>
+                {EmployeesTable({data: employees, border: '1'})}
+                <h1> Listing all male employees- {maleEmployees.length} </h1>
+                {EmployeesTable({data: maleEmployees})}
+                <h1> Listing all female employees- {femaleEmployees.length} </h1>
+                {EmployeesTable({data: femaleEmployees})}
+                <h1> Listing all tech employees- {techEmployees.length} </h1>
+                {EmployeesTable({data: techEmployees})}
+            </div>
+         )
+        
+        ReactDOM.render(ele, document.getElementById('root'))
+    </script>
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

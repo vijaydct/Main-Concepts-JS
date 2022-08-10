@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <!-- https://unpkg.com/react@16.13.1/umd/react.development.js -->
+    <script src="./js/react.development.js"></script>
+    <!-- https://unpkg.com/react-dom@16.13.1/umd/react-dom.development.js -->
+    <script src="./js/react-dom.development.js"></script>
+    <!-- https://unpkg.com/browse/babel-standalone@6.26.0/babel.js -->
+    <script src="./js/babel.js"></script>
+    <script type="text/babel">
+
+        const rootHandle = document.getElementById('root')
+        // We can not exchange the data b/w adjucent components in react. but, we can do via one of two ways that is parent-child relationship concept.
+        //  We can embed the ComponenTwo into ComponentOne and pass the data via parops to ComponentTwo is called parent-child relation.
+        // when we are passing the data as props which is not only datatypes(string, numbers, boolean & objects), we can also passdown functions / methods via props.
+        
+        class Employees extends React.Component{ // parent component
+            constructor(){
+                super()
+                this.state = {
+                    employees: [
+                                { id: 1, name: 'arjun', email: 'arjun@gmail', gender: 'male', department: 'tech'},
+                                { id: 2, name: 'sruthi', email: 'sruthi@gmail', gender: 'female', department: 'tech' },
+                                { id: 3, name: 'deepa', email: 'deepa@gmail', gender: 'female', department: 'hr' },
+                                { id: 4, name: 'jobin', email: 'jobin@gmail', gender: 'male', department: 'facility' },
+                            ]
+                }
+            }
+
+            handleRemove = (id) => {
+                this.setState((prevState) => {
+                    return {
+                        employees: prevState.employees.filter((ele) => ele.id !== id)
+                    }
+                })
+            }
+
+            render() {
+                return (
+                    <div>
+                        <h1>Listing Employees- {this.state.employees.length} </h1>
+                        <EmployeesTable data={this.state.employees} handleRemove= {this.handleRemove}/>
+                    </div>
+                )
+            }
+        }
+
+        // child component
+        function EmployeesTable(props) {
+            return (
+                <div>
+                    <table border="1px solid green">
+                        <thead>
+                            <th>#</th>
+                            <th>name</th>
+                            <th>gender</th>
+                            <th>email</th>
+                            <th>department</th>
+                            <th>action</th>
+                        </thead> 
+                        <tbody>
+                            {props.data.map(function(ele){
+                            return <tr key={ele.id}>
+                                        <td>{ele.id}</td>
+                                        <td>{ele.name}</td>
+                                        <td>{ele.gender}</td>
+                                        <td>{ele.email}</td>
+                                        <td>{ele.department}</td>
+                                        <td> <button onClick={() => {
+                                            console.log(ele.id)
+                                            props.handleRemove(ele.id)
+                                        }}> remove </button></td>
+                                    </tr>
+                            })}
+                        </tbody>
+                    </table>
+                </div>
+            )
+        }
+
+        ReactDOM.render(<Employees />, rootHandle)
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <!-- https://unpkg.com/react@16.13.1/umd/react.development.js -->
+    <script src="./js/react.development.js"></script>
+    <!-- https://unpkg.com/react-dom@16.13.1/umd/react-dom.development.js -->
+    <script src="./js/react-dom.development.js"></script>
+    <!-- https://unpkg.com/browse/babel-standalone@6.26.0/babel.js -->
+    <script src="./js/babel.js"></script>
+    <script type="text/babel">
+    const rootHandle = document.getElementById('root')
+    class RePrint extends React.Component{
+        constructor(){
+            super()
+            this.state={
+                textvalue:''
+            }
+        }
+
+        handleChangeText=(e)=>{
+            const textvalue=e.target.value
+            this.setState({textvalue})
+        }
+
+        render(){
+
+            return(
+                <div>
+                    <h1>Re Print</h1>
+                    <input type="text" value={this.state.textvalue} onChange={this.handleChangeText}/>
+                    <h1>h1{this.state.textvalue}</h1>
+                    <h2>h2{this.state.textvalue}</h2>
+                    <h3>h3{this.state.textvalue}</h3>
+                    <h4>h4{this.state.textvalue}</h4>
+                    <h5>h5{this.state.textvalue}</h5>
+                    <p>p{this.state.textvalue}</p>
+                </div>
+            )
+        }
+    }
+    ReactDOM.render(<RePrint/>, rootHandle)
+    </script>
+
+</body>
+
+</html>

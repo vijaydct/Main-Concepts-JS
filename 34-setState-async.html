@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <!-- https://unpkg.com/react@16.13.1/umd/react.development.js -->
+    <script src="./js/react.development.js"></script>
+    <!-- https://unpkg.com/react-dom@16.13.1/umd/react-dom.development.js -->
+    <script src="./js/react-dom.development.js"></script>
+    <!-- https://unpkg.com/browse/babel-standalone@6.26.0/babel.js -->
+    <script src="./js/babel.js"></script>
+    <script type="text/babel">
+
+        const rootHandle = document.getElementById('root')
+
+        class Counter extends React.Component { // parent component
+            constructor() {
+                super()
+                this.state = {
+                    count: 0
+                }
+            }
+
+            handleUp = () => {
+                console.log('handle up event handler')
+                console.log('before set state function', this.state)
+                this.setState((prevState) => {
+                    return {
+                        count: prevState.count += 1
+                    }
+                }, () => {
+                    console.log('set state call back function', this.state)
+                    console.log('here you can use any async call back function like axios', this.state)
+                })
+                console.log('after set state function', this.state)
+            }
+
+            render() {
+                console.log('render', this.state)
+                return (
+                    <div>
+                        <h1>{this.state.count}</h1>
+                        <Btn btnText ='up' handleClick={this.handleUp}/>
+                    </div>
+                )
+            }
+        }
+
+
+        // child component
+        function Btn(props) {
+            return (
+                <div>
+                    <button onClick= {props.handleClick}>{props.btnText}</button>
+                </div>
+            )
+        }
+
+    ReactDOM.render(<Counter />, rootHandle);
+
+    </script>
+
+</body>
+
+</html>
+
+/*
+    nested routes - 
+        url - dct.com/projects/1
+            - dct.com/projects/1/employees/10
+
+            <Link> to={`/projects/${pid}/employees/${eid}`} </Link>
+
+            const pid = this.props.match.params.pid
+            const eid = this.props.match.params.eid
+
+*/

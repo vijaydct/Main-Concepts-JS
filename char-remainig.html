@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+
+    <!-- https://unpkg.com/react@16.13.1/umd/react.development.js -->
+    <script src="./js/react.development.js"></script>
+    <!-- https://unpkg.com/react-dom@16.13.1/umd/react-dom.development.js -->
+    <script src="./js/react-dom.development.js"></script>
+    <!-- https://unpkg.com/browse/babel-standalone@6.26.0/babel.js -->
+    <script src="./js/babel.js"></script>
+    <script type="text/babel">
+    const rootHandle=document.getElementById('root')
+    class CharRemaining extends React.Component{
+        constructor(){
+            super()
+            this.state={
+                text:'',
+                charCount:20
+            }
+        }
+
+        handleReduceText=(e)=>{
+            this.setState({text: e.target.value})
+        }
+
+
+        render(){
+            return(
+                <div>
+                <h1>Remaining Characters</h1>
+                <textarea rows="3" cols="30" value={this.state.text} onChange={this.handleReduceText} maxlength={this.state.charCount}></textarea>
+                <h3>{this.state.charCount-this.state.text.length} chars left</h3>
+                </div>
+            )
+        }
+    }
+    
+    ReactDOM.render(<CharRemaining />, rootHandle)
+    </script>
+
+</body>
+
+</html>
